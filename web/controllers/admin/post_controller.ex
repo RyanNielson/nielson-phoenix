@@ -16,13 +16,6 @@ defmodule Nielson.Admin.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    IO.puts(inspect(post_params))
-
-    if post_params["published"] do
-      IO.puts "YAAA"
-    else
-      IO.puts "NAHH"
-    end
     changeset = Post.changeset(%Post{}, post_params)
 
     case Repo.insert(changeset) do
