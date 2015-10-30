@@ -1,0 +1,7 @@
+<%= render "_header.html", conn: @conn, post: hd(@posts) %>
+
+<div class="container">
+  <%= for posts <- Enum.chunk(tl(@posts), 3) do %>
+    <%= render "_post_row.html", conn: @conn, posts: posts %>
+  <% end %>
+</div>

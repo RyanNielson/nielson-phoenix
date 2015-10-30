@@ -17,13 +17,13 @@ defmodule Nielson.SessionController do
     conn
     |> delete_session(:user_id)
     |> put_flash(:info, "Signed out successfully!")
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: root_path(conn, :index))
   end
 
   defp sign_in(user, _password, conn) when is_nil(user) do
     conn
     |> put_flash(:error, "Invalid email/password combination!")
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: root_path(conn, :index))
   end
 
   defp sign_in(user, password, conn) do
@@ -31,12 +31,12 @@ defmodule Nielson.SessionController do
       conn
       |> put_session(:user_id, user.id)
       |> put_flash(:info, "Sign in successful!")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: root_path(conn, :index))
     else
       conn
       |> put_session(:user_id, nil)
       |> put_flash(:error, "Invalid email/password combination!")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: root_path(conn, :index))
     end
   end
 end

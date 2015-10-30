@@ -1,0 +1,9 @@
+<div class="col-md-4 col-sm-6">
+  <h2><%= @post.title %></h2>
+  <p><%= @post.summary %></p>
+  <p>
+    <%= link to: post_path(@conn, :show, @post), class: "btn btn-default" do %>
+      Read more &raquo;
+    <% end %>
+  </p>
+</div>

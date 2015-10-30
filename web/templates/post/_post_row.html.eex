@@ -1,0 +1,5 @@
+<div class="row">
+  <%= for post <- @posts do %>
+    <%= render "_post.html", conn: @conn, post: post %>
+  <% end %>
+</div>

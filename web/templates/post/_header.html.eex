@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= @post.title %></h1>
+    <p><%= @post.summary %></p>
+    <p>
+      <%= link to: post_path(@conn, :show, @post), class: "btn btn-primary btn-lg" do %>
+        Read more &raquo;
+      <% end %>
+    </p>
+  </div>
+</div>

@@ -21,10 +21,11 @@ defmodule Nielson.Router do
   scope "/", Nielson do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    # get "/", PageController, :index, as: :root
 
+    get "/", PostController, :index, as: :root
     resources "/posts", PostController, only: [:show]
-    
+
 
     get "/login", SessionController, :new
     post "/login", SessionController, :create

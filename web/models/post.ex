@@ -15,11 +15,13 @@ defmodule Nielson.Post do
     field :published, :boolean, virtual: true
   end
 
-  @required_fields ~w(title slug summary body_markdown body_html published)
+  @required_fields ~w(title slug summary body_markdown published)
   @optional_fields ~w()
 
   before_insert :set_published_at
   before_update :set_published_at
+  before_insert :set_body_html
+  before_update :set_body_html
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -42,5 +44,11 @@ defmodule Nielson.Post do
     else
       changeset
     end
+  end
+
+  defp set_body_html(changeset) do
+    body_markdown = changeset |> get_field(:body_markdown)
+
+    changeset |> put_change(:body_html, Earmark.to_html(body_markdown))
   end
 end
