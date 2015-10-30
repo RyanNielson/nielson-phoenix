@@ -1,19 +1,19 @@
 defmodule Nielson.Plugs.SetCurrentUser do
   import Plug.Conn
 
+  alias Nielson.Repo
+  alias Nielson.User
+
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    if get_session(conn, :user_id) do
-      conn = add_current_user_to_session(conn)
+    case get_session(conn, :user_id) do
+      nil     -> conn
+      user_id -> add_user_to_conn(conn, user_id)
     end
-
-    conn
   end
 
-  defp add_current_user_to_session(conn) do
-    user = Nielson.Repo.get(Nielson.User, get_session(conn, :user_id))
-
-    Plug.Conn.put_private(conn, :current_user, user)
+  defp add_user_to_conn(conn, user_id) do
+    put_private conn, :current_user, Repo.get(User, user_id)
   end
 end

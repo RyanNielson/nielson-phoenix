@@ -22,7 +22,9 @@ defmodule Nielson.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
     resources "/posts", PostController, only: [:show]
+    
 
     get "/login", SessionController, :new
     post "/login", SessionController, :create
@@ -30,6 +32,7 @@ defmodule Nielson.Router do
 
     scope "/admin", as: :admin do
       pipe_through :authenticated
+
       resources "/posts", Admin.PostController, except: [:show]
     end
   end

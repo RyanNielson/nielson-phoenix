@@ -15,5 +15,6 @@ defmodule Nielson.Plugs.AuthenticateUser do
     conn
     |> put_flash(:error, "You must be logged in.")
     |> redirect(to: "/")
+    |> halt
   end
 end
