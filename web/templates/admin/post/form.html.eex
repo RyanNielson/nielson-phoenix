@@ -1,0 +1,50 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below:</p>
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :title, "Title", class: "control-label" %>
+    <%= text_input f, :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :slug, "Slug", class: "control-label" %>
+    <%= text_input f, :slug, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :summary, "Summary", class: "control-label" %>
+    <%= text_input f, :summary, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :body_markdown, "Body markdown", class: "control-label" %>
+    <%= textarea f, :body_markdown, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :body_html, "Body html", class: "control-label" %>
+    <%= textarea f, :body_html, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= checkbox f, :published, class: "form-control" %>
+  </div>
+
+  <!-- <div class="form-group">
+    <%#= label f, :published_at, "Published at", class: "control-label" %>
+    <%#= datetime_select f, :published_at, class: "form-control" %>
+  </div> -->
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

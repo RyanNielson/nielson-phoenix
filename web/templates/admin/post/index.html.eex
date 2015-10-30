@@ -1,0 +1,38 @@
+<h2>Listing posts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Slug</th>
+      <th>Summary</th>
+      <th>Body markdown</th>
+      <th>Body html</th>
+      <th>Published at</th>
+      <th>User</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for post <- @posts do %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.slug %></td>
+      <td><%= post.summary %></td>
+      <td><%= post.body_markdown %></td>
+      <td><%= post.body_html %></td>
+      <td><%= post.published_at %></td>
+      <td><%= post.user_id %></td>
+
+      <td class="text-right">
+        <%#= link "Show", to: post_path(@conn, :show, post), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: admin_post_path(@conn, :edit, post), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%#= link "New post", to: post_path(@conn, :new) %>
