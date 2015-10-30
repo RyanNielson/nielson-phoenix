@@ -1,5 +1,6 @@
 defmodule Nielson.Post do
   use Nielson.Web, :model
+  use Ecto.Model.Callbacks
 
   schema "posts" do
     field :title, :string
@@ -17,6 +18,9 @@ defmodule Nielson.Post do
   @required_fields ~w(title slug summary body_markdown body_html published)
   @optional_fields ~w()
 
+  before_insert :set_published_at
+  before_update :set_published_at
+
   @doc """
   Creates a changeset based on the `model` and `params`.
 
@@ -27,7 +31,6 @@ defmodule Nielson.Post do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> unique_constraint(:slug)
-    |> set_published_at
   end
 
   defp set_published_at(changeset) do
